@@ -1,0 +1,100 @@
+html, body {
+  margin           : 0;
+  font-family      : "Helvetic Neue", Helvetica, Arial, sans-serif;
+  background-color : rgb(252, 253, 253);
+}
+
+.jumbotron {
+  background-color : #fff;
+  border           : solid 0.1em #ddd;
+  box-shadow       : #ccc 0.2em 0.2em 1.6em 0.3em;
+}
+
+.content {
+  margin-top : 50px;
+}
+
+.undecorated-link:hover {
+  text-decoration : none;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display : none !important;
+}
+
+.ng-invalid.ng-dirty {
+  border-color : #FA787E;
+}
+
+.ng-valid.ng-dirty {
+  border-color : #78FA89;
+}
+
+.page-header {
+  margin : 10px 0 5px;
+}
+
+.breadcrumb {
+  margin-bottom : 5px;
+}
+
+.table-container {
+  width      : 100%;
+  max-width  : 100%;
+  overflow-x : auto;
+  margin     : 5px 0;
+}
+
+.table-container .table {
+  margin-bottom : 0;
+}
+
+.metadata {
+  margin-bottom : 10px;
+}
+
+.metadata .table td, .metadata .table th {
+  border        : none;
+  border-bottom : 1px solid #eeeeee;
+}
+
+.pagination {
+  margin : 0;
+}
+
+.logs-accordion-container .panel-body {
+  color            : #333;
+  background-color : #fff;
+}
+
+.log-container {
+  font-family : monospace;
+  font-size   : small;
+  max-height  : 300px;
+  overflow    : auto;
+}
+
+.log-container pre {
+  padding          : 0;
+  margin           : 0;
+  border           : 0;
+  border-radius    : 0;
+  color            : inherit;
+  background-color : transparent;
+  white-space      : nowrap;
+}
+
+.logLine {
+  padding          : 0 2px;
+  margin           : 0;
+  line-height      : 1.5;
+  border           : 0;
+  border-radius    : 0;
+  min-height       : 18px;
+  background-color : transparent;
+}
+
+.logLine:hover, .logLine span:hover {
+  color            : #000;
+  background-color : #bbbbbb;
+}

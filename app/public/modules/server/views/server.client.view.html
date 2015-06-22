@@ -1,0 +1,69 @@
+<section data-ng-controller="ServerController" data-ng-init="init()">
+  <div cg-busy="server"></div>
+
+  <div class="page-header">
+    <h1>Server
+      <small>Information about the running instance of the server</small>
+    </h1>
+  </div>
+
+  <div ncy-breadcrumb></div>
+
+  <div data-ng-show="error" class="alert alert-danger">
+    <strong>Error:</strong>
+    <pre>{{error | json}}</pre>
+  </div>
+  <div data-ng-if="!error">
+
+    <div class="metadata table-container">
+      <table class="table table-hover table-condensed">
+        <tr class="text-muted">
+          <td colspan="2">Title:</td>
+          <td colspan="2" class="text-primary"><strong data-ng-bind="server.title"></strong></td>
+          <td>Database:</td>
+          <td class="text-primary"><strong data-ng-bind="server.db"></strong></td>
+        </tr>
+      </table>
+      <table class="table table-hover table-condensed">
+        <tr class="text-muted">
+          <td>Environment:</td>
+          <td class="text-primary"><strong data-ng-bind="server.env"></strong></td>
+          <td>Port:</td>
+          <td class="text-primary"><strong data-ng-bind="server.port"></strong></td>
+          <td>Process ID:</td>
+          <td class="text-primary"><strong data-ng-bind="server.pid"></strong></td>
+        </tr>
+      </table>
+    </div>
+
+    <p class="text-muted">Logs:</p>
+
+    <div class="logs-accordion-container">
+      <accordion>
+        <accordion-group heading="{{libraryLogFileHeader}}" data-ng-if="libraryLogVisible"
+                         ng-init="libraryLog.open = libraryLogVisible"
+                         is-open="libraryLog.open">
+          <div class="log-container" data-scroll-glue>
+          <pre>
+            <div data-ng-repeat="line in server.libraryLogFile track by $index">
+              <p class="logLine"><span data-ng-bind-html="renderHtml(line)"></span></p>
+            </div>
+          </pre>
+          </div>
+        </accordion-group>
+        <accordion-group heading="{{appLogFileHeader}}" ng-init="appLog.open = !libraryLogVisible"
+                         is-open="appLog.open">
+          <div class="log-container" data-scroll-glue>
+          <pre>
+            <div data-ng-repeat="line in server.appLogFile track by $index">
+              <p class="logLine"><span data-ng-bind-html="renderHtml(line)"></span></p>
+            </div>
+          </pre>
+          </div>
+        </accordion-group>
+
+      </accordion>
+    </div>
+
+  </div>
+</section>

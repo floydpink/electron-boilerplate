@@ -10,8 +10,8 @@ var mainWindow;
 
 // Preserver of the window size and position between app launches.
 var mainWindowState = windowStateKeeper('main', {
-    width: 1000,
-    height: 600
+    width: 1366,
+    height: 768
 });
 
 app.on('ready', function () {
@@ -27,7 +27,7 @@ app.on('ready', function () {
         mainWindow.maximize();
     }
 
-    mainWindow.loadUrl('file://' + __dirname + '/app.html');
+    mainWindow.loadUrl('file://' + __dirname + '/startup/index.html');
 
     if (env.name === 'development') {
         devHelper.setDevMenu();
