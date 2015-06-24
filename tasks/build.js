@@ -19,8 +19,8 @@ var paths = {
         'app/bower_components/**',
         'app/vendor/**',
         'app/**/*.html'
-    ],
-}
+    ]
+};
 
 // -------------------------------------
 // Tasks
