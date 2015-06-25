@@ -1,0 +1,66 @@
+<section data-ng-controller="FoldersController" data-ng-init="find()">
+  <div cg-busy="folders.$resolved"></div>
+
+  <div class="page-header">
+    <h1>Library
+      <small>All the folders that have been added in to the database</small>
+    </h1>
+  </div>
+  <div ncy-breadcrumb></div>
+  <div class="alert alert-warning text-center" data-ng-if="folders.$resolved && !folders.length">
+    No folders have been added into the library yet, why don't you <a href="/#!/folders/add">add one</a>?
+  </div>
+  <div class="col-md-12 group table-container">
+    <div class="pull-right" data-ng-if="folders.length">
+      <a class="btn btn-success" href="/#!/folders/add" title="Add Folder">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </div>
+    <table class="table table-striped table-hover" data-ng-if="folders.length">
+      <thead>
+        <tr>
+          <th><i title="Status" class="glyphicon glyphicon-info-sign"></i></th>
+          <th>Title</th>
+          <th>Path</th>
+          <th class="text-nowrap">Last Scanned On</th>
+          <th class="text-center">Sub-Folders</th>
+          <th class="text-center">Files</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tr dir-paginate="folder in folders | orderBy: 'path' | itemsPerPage: 8">
+        <td>
+          <i data-ng-if="folder.scanning" title="Scanning folder" class="glyphicon glyphicon-refresh gly-spin"></i>
+          <i data-ng-if="!folder.scanning" data-ng-attr-title="Last scanned: {{folder.lastScanned | date:'medium'}}"
+             class="glyphicon glyphicon-ok"></i>
+        </td>
+        <td class="text-nowrap"><a data-ng-href="#!/folders/{{folder._id}}">{{folder.title}}</a></td>
+        <td class="text-nowrap">{{folder.path}}</td>
+        <td class="text-nowrap">{{folder.lastScanned | date:'mediumDate'}}</td>
+        <td class="text-nowrap text-center">{{folder.subfolders.length}}</td>
+        <td class="text-nowrap text-center">{{folder.musicFilesCount}}</td>
+        <td>
+          <div class="pull-right">
+            <a class="btn btn-default" data-ng-href="#!/folders/{{folder._id}}" title="View Folder Details">
+              <i class="glyphicon glyphicon-forward"></i>
+            </a>
+          <span data-ng-if="authentication.user._id == folder.user._id">
+            <!--
+            <a class="btn btn-primary" href="/#!/folders/{{folder._id}}/edit" title="Edit Folder">
+              <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            -->
+            <!--<a class="btn btn-primary" data-ng-click="update(true);" title="Rescan Folder">-->
+              <!--<i class="glyphicon glyphicon-refresh"></i>-->
+            <!--</a>-->
+          </span>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <div class="pull-right" data-ng-if="folders.length">
+      <dir-pagination-controls template-url="lib/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+    </div>
+    <a href="#!/" class="btn btn-default" title="Go Back">Back</a>
+  </div>
+</section>

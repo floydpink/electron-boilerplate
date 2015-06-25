@@ -1,0 +1,22 @@
+<section data-ng-controller="FoldersController">
+  <h2>Add Folder</h2>
+  <div ncy-breadcrumb></div>
+  <div class="col-md-12">
+    <form role="form" name="folderForm" class="form-horizontal" data-ng-submit="create()" novalidate>
+      <div data-ng-show="error" class="text-danger">
+        <strong data-ng-bind="error"></strong>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error': folderForm.path.$dirty && folderForm.path.$invalid }">
+        <label class="control-label" for="path">Path</label>
+        <div class="controls">
+          <directory-picker ng-model="path" id="path" class="form-control" required
+                            placeholder="Path (for example: /Users/username/Music/)"></directory-picker>
+        </div>
+      </div>
+      <div class="form-group">
+        <back-button></back-button>
+        <input type="submit" class="btn btn-default" ng-disabled="!path">
+      </div>
+    </form>
+  </div>
+</section>
