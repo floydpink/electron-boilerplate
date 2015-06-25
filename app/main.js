@@ -27,7 +27,7 @@ app.on('ready', function () {
         mainWindow.maximize();
     }
 
-    mainWindow.loadUrl('file://' + __dirname + '/app.html');
+    mainWindow.loadUrl('file://' + __dirname + '/startup/index.html');
 
     if (env.name === 'development') {
         devHelper.setDevMenu();
