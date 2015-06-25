@@ -1,0 +1,76 @@
+<section data-ng-controller="FoldersController" data-ng-init="findOne()">
+  <div cg-busy="folder"></div>
+
+  <div class="page-header">
+    <h1>{{folder.title}}
+      <small class="text-muted">[ Folder Title ]</small>
+    </h1>
+  </div>
+  <div ncy-breadcrumb></div>
+  <div class="alert alert-info text-center" data-ng-if="folder.scanning">
+    <i data-ng-if="folder.scanning" title="Scanning folder" class="glyphicon glyphicon-refresh gly-spin"></i>
+    This folder is currently being scanned for music files.
+  </div>
+  <div class="col-md-12">
+    <div class="pull-right" data-ng-show="authentication.user._id == folder.user._id && !folder.scanning">
+      <a class="btn btn-primary" data-ng-click="update(true);" title="Rescan Folder">
+        <i class="glyphicon glyphicon-refresh"></i>
+      </a>
+      <a class="btn btn-primary" href="/#!/folders/{{folder._id}}/edit" title="Edit Folder">
+        <i class="glyphicon glyphicon-edit"></i>
+      </a>
+      <a class="btn btn-primary" data-ng-click="remove();" title="Delete Folder">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+    </div>
+    <div class="pull-right" data-ng-show="authentication.user._id == folder.user._id && folder.scanning">
+      <a class="btn btn-primary" data-ng-click="remove();" title="Delete Folder">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+    </div>
+    <div class="group">
+      <div class="metadata table-container">
+        <table class="table table-hover table-condensed">
+          <tr class="text-muted">
+            <td>Total Folders:</td>
+            <td class="text-primary text-right"><strong data-ng-bind="folder.subfolders.length"></strong></td>
+            <td>Total Files:</td>
+            <td class="text-primary text-right"><strong data-ng-bind="folder.musicFilesCount"></strong></td>
+          </tr>
+        </table>
+        <table class="table table-hover table-condensed">
+          <tr class="text-muted">
+            <td>Path:</td>
+            <td class="text-primary text-right"><strong data-ng-bind="folder.path"></strong></td>
+          </tr>
+        </table>
+      </div>
+      <div data-ng-if="folder.subfolders.length && !folder.scanning" class="clearfix">
+        <p class="text-muted">Subfolders:</p>
+        <div class="table-container">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th class="text-center">Files</th>
+                <th>Path</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr dir-paginate="subfolder in folder.subfolders | orderBy: 'path' | itemsPerPage: 7">
+                <td class="text-nowrap"><a data-ng-href="#!/folders/{{subfolder.parentFolder}}/subfolders/{{subfolder._id}}">{{subfolder.title}}</a></td>
+                <td class="text-nowrap text-center">{{subfolder.musicFilesCount}}</td>
+                <td class="text-nowrap">{{subfolder.path}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pull-right">
+          <dir-pagination-controls template-url="lib/angular-utils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+        </div>
+      </div>
+    </div>
+    <audit-trail entity="folder"></audit-trail>
+    <a href="#!/folders" class="btn btn-default" title="Go Back">Back</a>
+  </div>
+</section>
